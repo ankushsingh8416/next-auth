@@ -5,7 +5,7 @@ function Navbar() {
     <>
       <header className="relative w-full border-b bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-          <div className="inline-flex items-center space-x-2">
+          <Link href="/" className="inline-flex items-center space-x-2">
             <span>
               <svg
                 width="30"
@@ -21,7 +21,7 @@ function Navbar() {
               </svg>
             </span>
             <span className="font-bold">An-digital</span>
-          </div>
+          </Link>
           <div className="hidden lg:block">
             <ul className="inline-flex space-x-8">
               <li>

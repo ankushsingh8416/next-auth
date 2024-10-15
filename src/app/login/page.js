@@ -4,8 +4,8 @@ function login() {
     return (
         <>
 
-            <div className="  bg-gray-100 py-12 flex flex-col justify-center sm:py-12">
-                <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+            <div className="  bg-gray-100  flex flex-col justify-center sm:py-12">
+                <div className="relative my-8 sm:max-w-xl sm:mx-auto">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
                     <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                         <div className="max-w-md mx-auto">
@@ -53,7 +53,7 @@ function login() {
                                             </button>
                                         </div>
                                         <div className="text-center mt-4">
-                                            <p className="text-gray-600">Don&apost have an account? <Link href="/register" className="text-blue-600 hover:underline">Sign Up</Link></p>
+                                            <p className="text-gray-600">Don&apos;t have an account? <Link href="/register" className="text-blue-600 hover:underline">Sign Up</Link></p>
                                         </div>
                                     </div>
                                 </div>
