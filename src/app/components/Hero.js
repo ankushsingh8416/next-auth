@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image"
 
 function Hero() {
     return (
@@ -31,11 +31,15 @@ function Hero() {
                             </div>
                         </div>
                         <div className="rounded-lg bg-gray-200 p-4">
+
                             <Image
                                 className="aspect-[3/2] w-full rounded-lg bg-gray-50 object-cover lg:aspect-auto lg:h-[500px] lg:object-center"
-                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBlb3BsZXxlbnwwfHwwfHw%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60"
-                                alt=""
+                                src="/img/hero.png"
+                                alt="Hero image"
+                                width={500}
+                                height={500}
                             />
+
                         </div>
                     </div>
                 </div>
@@ -535,8 +539,10 @@ function Hero() {
                         <div className="mt-10 w-full md:w-2/3 lg:mt-0 lg:w-1/2">
                             <Image
                                 className="h-full w-full rounded-md object-cover"
-                                src="https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG5ld3NsZXR0ZXJ8ZW58MHx8MHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60"
-                                alt="Newsletter"
+                                src="/img/news.avif"
+                                alt="Hero image"
+                                width={500}
+                                height={500}
                             />
                         </div>
                     </div>
