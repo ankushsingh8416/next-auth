@@ -53,7 +53,7 @@ function login() {
                                             </button>
                                         </div>
                                         <div className="text-center mt-4">
-                                            <p className="text-gray-600">Don't have an account? <Link href="/register" className="text-blue-600 hover:underline">Sign Up</Link></p>
+                                            <p className="text-gray-600">Don&apost have an account? <Link href="/register" className="text-blue-600 hover:underline">Sign Up</Link></p>
                                         </div>
                                     </div>
                                 </div>
