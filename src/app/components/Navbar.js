@@ -47,12 +47,10 @@ function Navbar() {
             </ul>
           </div>
           <div className=" lg:block flex  space-x-4">
-            <Link href="/register" className="rounded-md bg-slate-200 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
-                Register
-            </Link>
+         
 
             <Link href="/login" className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
-                Login
+                Dashboard
             </Link>
           </div>
         
