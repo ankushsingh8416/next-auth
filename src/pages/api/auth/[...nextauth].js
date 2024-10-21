@@ -1,4 +1,3 @@
-// pages/api/auth/[...nextauth].js
 
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -53,5 +52,5 @@ export default NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "efhgdasdjsdfvhdgdaskjcgdu",
 });
