@@ -26,7 +26,7 @@ export default NextAuth({
           throw new Error('Invalid credentials');
         }
 
-        return { id: user._id, name: user.name, email: user.email }; // Return user object
+        return { id: user._id, name: user.name, email: user.email }; 
       },
     }),
   ],
@@ -34,7 +34,7 @@ export default NextAuth({
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/login', // Redirect to login page on error
+    signIn: '/login',
   },
   callbacks: {
     async jwt({ token, user }) {
