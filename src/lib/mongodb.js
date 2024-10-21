@@ -1,4 +1,3 @@
-// lib/mongodb.js
 import mongoose from 'mongoose';
 
 const MONGODB_URI = "mongodb+srv://nkshrazz:uM0DnW76SAx32doo@cluster0.jx6tk.mongodb.net/client?retryWrites=true&w=majority&appName=Cluster0"
