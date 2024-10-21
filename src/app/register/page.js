@@ -5,15 +5,19 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
+import LoaderBtn from "../components/LoaderBtn";
 
 function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const res = await axios.post('/api/register', {
@@ -30,6 +34,7 @@ function Register() {
             }
         } catch (error) {
             console.error(error);
+            setLoading(false);
 
             // Handle specific error cases
             if (error.response?.status === 409) {
@@ -106,8 +111,16 @@ function Register() {
                                     <div className="relative">
                                         <button
                                             type="submit"
-                                            className="bg-gradient-to-r from-blue-300 to-blue-600 text-white rounded-full px-4 py-2 w-full shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                            Register
+                                            className="bg-gradient-to-r from-blue-300 to-blue-600 text-white rounded-full px-4 py-2 w-full shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                            disabled={loading}  
+                                        >
+                                            {loading ? (
+                                                <span className="flex items-center justify-center">
+                                                    <LoaderBtn /> 
+                                                </span>
+                                            ) : (
+                                                "Register"  
+                                            )}
                                         </button>
                                     </div>
 

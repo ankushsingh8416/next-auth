@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
+import SessionProviderWrapper from "./components/SessionProviderWrapper"; 
 
 export const metadata = {
   title: "Create Next App",
@@ -11,11 +12,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Toaster position="bottom-right"
-          reverseOrder={false} />
+        <Toaster position="bottom-right" reverseOrder={false} />
         <Navbar />
-        
-        {children}
+
+        <SessionProviderWrapper>
+          {children}
+        </SessionProviderWrapper>
       </body>
     </html>
   );

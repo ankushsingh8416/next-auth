@@ -1,18 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
+import LoaderBtn from "../components/LoaderBtn";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         const result = await signIn('credentials', {
             email,
@@ -20,10 +23,18 @@ function Login() {
             redirect: false,
         });
 
+        setLoading(false);
+
         if (result.error) {
             toast.error(result.error);
         } else {
             toast.success('Login Successful');
+
+            const session = await getSession();
+            if (session?.user) {
+                console.log("Username:", session.user.name);
+            }
+
             setTimeout(() => {
                 router.push("/dashboard");
             }, 1000);
@@ -75,8 +86,16 @@ function Login() {
                                     <div className="relative">
                                         <button
                                             type="submit"
-                                            className="bg-gradient-to-r from-blue-300 to-blue-600 text-white rounded-full px-4 py-2 w-full shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                            Login
+                                            className="bg-gradient-to-r from-blue-300 to-blue-600 text-white rounded-full px-4 py-2 w-full shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                            disabled={loading}  
+                                        >
+                                            {loading ? (
+                                                <span className="flex items-center justify-center">
+                                                    <LoaderBtn /> 
+                                                </span>
+                                            ) : (
+                                                "Login"  
+                                            )}
                                         </button>
                                     </div>
                                     <div className="text-center mt-4">
