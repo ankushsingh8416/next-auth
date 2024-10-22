@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
-import toast from "react-hot-toast";
 import LoaderBtn from "../components/LoaderBtn";
+import Image from "next/image";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +18,8 @@ function Login() {
         const result = await signIn('credentials', {
             email,
             password,
-            redirect: false,
+            redirect: true,
+            callbackUrl: '/dashboard'
         });
 
         setLoading(false);
@@ -29,15 +28,6 @@ function Login() {
             toast.error(result.error);
         } else {
             toast.success('Login Successful');
-
-            const session = await getSession();
-            if (session?.user) {
-                console.log("Username:", session.user.name);
-            }
-
-            setTimeout(() => {
-                router.push("/dashboard");
-            }, 1000);
         }
     };
 
@@ -87,17 +77,38 @@ function Login() {
                                         <button
                                             type="submit"
                                             className="bg-gradient-to-r from-blue-300 to-blue-600 text-white rounded-full px-4 py-2 w-full shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                            disabled={loading}  
+                                            disabled={loading}
                                         >
                                             {loading ? (
                                                 <span className="flex items-center justify-center">
-                                                    <LoaderBtn /> 
+                                                    <LoaderBtn />
                                                 </span>
                                             ) : (
-                                                "Login"  
+                                                "Login"
                                             )}
                                         </button>
                                     </div>
+
+                                    <div className="relative text-center py-4">
+                                        <button
+                                            type="button"
+                                            onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+                                            className="bg-black font-bold flex items-center justify-center gap-6  text-white rounded-full px-4 py-2 w-full shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                        >
+                                            <Image
+                                                src="/img/google.png"
+                                                alt="google"
+                                                width={40}
+                                                height={40}
+                                            />
+
+
+                                            Sign in with Google
+                                        </button>
+                                    </div>
+
+
+
                                     <div className="text-center mt-4">
                                         <p className="text-gray-600">Don&apos;t have an account? <Link href="/register" className="text-blue-600 hover:underline">Create Account</Link></p>
                                     </div>

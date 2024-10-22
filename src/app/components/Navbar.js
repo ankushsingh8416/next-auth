@@ -1,6 +1,23 @@
+"use client"
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 function Navbar() {
+  const { data: session, status } = useSession(); 
+  const router = useRouter();
+
+  const handleDashboardClick = () => {
+    if (status === 'loading') {
+      return; 
+    }
+    if (!session) {
+      router.push('/login'); 
+    } else {
+      router.push('/dashboard'); 
+    }
+  };
+
   return (
     <>
       <header className="relative w-full border-b bg-white">
@@ -22,6 +39,7 @@ function Navbar() {
             </span>
             <span className="font-bold">An-digital</span>
           </Link>
+
           <div className="hidden lg:block">
             <ul className="inline-flex space-x-8">
               <li>
@@ -47,12 +65,29 @@ function Navbar() {
             </ul>
           </div>
 
-
-          <Link href="/login" className=" flex gap-2 rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
-
-            <svg width="20px" height="20px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 0L9 1L11.2929 3.29289L6.2929 8.29289L7.70711 9.70711L12.7071 4.7071L15 7L16 6V0H10Z" fill="#fff"></path> <path d="M1 2H6V4H3V13H12V10H14V15H1V2Z" fill="#fff"></path> </g></svg>            Dashboard
-          </Link>
-
+          <button
+            onClick={handleDashboardClick}
+            className="flex gap-2 rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+            <svg
+              width="20px"
+              height="20px"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#ffffff"
+            >
+              <path
+                d="M10 0L9 1L11.2929 3.29289L6.2929 8.29289L7.70711 9.70711L12.7071 4.7071L15 7L16 6V0H10Z"
+                fill="#fff"
+              ></path>
+              <path
+                d="M1 2H6V4H3V13H12V10H14V15H1V2Z"
+                fill="#fff"
+              ></path>
+            </svg>
+            Dashboard
+          </button>
         </div>
       </header>
     </>

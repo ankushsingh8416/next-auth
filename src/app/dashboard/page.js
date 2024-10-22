@@ -1,21 +1,31 @@
-// src/app/dashboard/page.js
 "use client";
 import Image from 'next/image';
 import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import Loader from '../components/Loader';
 
 const Dashboard = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const loading = status === "loading";
 
   if (loading) {
     return <Loader />;
   }
 
+  if (!loading && !session) {
+    // Redirect to login if no session is found
+    router.push('/login');
+    return null; // Prevent rendering of the dashboard page while redirecting
+  }
+
   const handleLogout = () => {
     signOut({ callbackUrl: '/login' });
   };
+
+  // Default user image
+  const defaultImage = '/img/user.avif';
 
   return (
     <div className="h-[calc(100vh-69px)] bg-gradient-to-r from-indigo-500 to-purple-500 flex flex-col items-center justify-center py-10">
@@ -24,7 +34,8 @@ const Dashboard = () => {
           <div className="flex items-center flex-wrap">
             <Image
               className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-indigo-500 shadow-md"
-              src="/img/user.avif"
+              // Show user's image from session or fallback to default image
+              src={session.user.image || defaultImage}
               alt="User Image"
               width={80}
               height={80}

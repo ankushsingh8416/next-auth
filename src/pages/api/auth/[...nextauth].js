@@ -1,11 +1,17 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 import connectToDatabase from '../../../lib/mongodb';
 import User from '../../../models/User';
 import bcrypt from 'bcrypt';
 
 export default NextAuth({
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -33,7 +39,7 @@ export default NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.name = user.name;
@@ -46,6 +52,9 @@ export default NextAuth({
       session.user.name = token.name;
       session.user.email = token.email;
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      return `${baseUrl}/dashboard`;
     },
   },
   secret: "efhgdasdjsdfvhdgdaskjcgdu",
